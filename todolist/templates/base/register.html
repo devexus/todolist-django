@@ -1,0 +1,53 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+
+<div class="card-body">
+    <div class="card-title">
+        <h1>Register</h1>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for={{form.username.auto_id}} class="form-label">{{form.username.label}}</label>
+            <input type="text" name={{form.username.name}} class="form-control" autofocus="" autocapitalize="none" autocomplete={{form.username.name}} maxlength="150" required="" id={{form.username.auto_id}}>
+        </div>
+
+        <div class="mb-3">
+            <label for={{form.password1.auto_id}} class="form-label">{{form.password1.label}}</label>
+            <input type="password" name={{form.password1.name}} class="form-control" autofocus="" autocapitalize="none" autocomplete={{form.password1.name}} maxlength="150" required="" id={{form.password1.auto_id}}>
+        </div>
+
+        <div class="mb-3">
+            <label for={{form.password2.auto_id}} class="form-label">{{form.password2.label}}</label>
+            <input type="password" name={{form.password2.name}} class="form-control" autofocus="" autocapitalize="none" autocomplete={{form.password2.name}} maxlength="150" required="" id={{form.password2.auto_id}}>
+        </div>
+
+        <input class="btn btn-primary mb-3" type="submit" value="Register">
+
+    </form>
+    {% if form.errors %}
+    <div class="alert alert-danger">
+      <strong>Errors:</strong>
+      <ul>
+        {% for field in form %}
+          {% if field.errors %}
+            <li><strong>{{ field.label }}:</strong></li>
+            <ul>
+              {% for error in field.errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+</div>
+
+
+
+
+{% endblock content %}

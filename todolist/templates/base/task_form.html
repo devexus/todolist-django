@@ -1,0 +1,36 @@
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="card-body">
+
+    <div>
+        <a class="btn btn-primary" href="{% url 'tasks' %}">Go back</a>
+    </div>
+
+
+    <div class="card-body">
+        <form method="POST" action="">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="{{form.title.auto_id}}" class="form-label">{{form.title.label}}</label>
+                <input type="text" name="{{form.title.name}}" class="form-control" autofocus="" value="{{form.title.value|default_if_none:''}}" autocapitalize="none" autocomplete="{{form.title.name}}" maxlength="150" required="" id="{{form.title.auto_id}}">
+            </div>
+            <div class="mb-3">
+                <label for="{{form.description.auto_id}}" class="form-label">{{form.description.label}}</label>
+                <textarea  class="form-control" name="{{form.description.name}}" cols="40" rows="10" id="{{form.description.auto_id}}" spellcheck="false">{{form.description.value|default_if_none:''}}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="{{form.complete.auto_id}}" class="form-label">{{form.complete.label}}</label>
+                <input type="checkbox" name={{form.complete.name}}  {% if form.complete.value %}checked{% endif %} id="{{form.complete.auto_id}}" >
+                
+            </div>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+
+    </div>
+</div>
+
+
+{% endblock content %}
